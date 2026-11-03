@@ -22,6 +22,20 @@ import requireAuth from '../middleware/requireAuth.js';
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+    res.json({
+        status: 'ok',
+        message: 'Budget Tracker API',
+        health: '/api/health',
+        endpoints: {
+            auth: ['/api/signup', '/api/login', '/api/logout'],
+            profile: ['/api/profile'],
+            transactions: ['/api/transaction'],
+            ai: ['/api/ai/parse', '/api/ai/auto-log', '/api/ai/insights', '/api/ai/chat']
+        }
+    });
+});
+
 // User Routes
 router.post('/signup', signup);
 router.post('/login', login);
