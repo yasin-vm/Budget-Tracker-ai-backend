@@ -8,7 +8,16 @@ import connectDB from './db/db.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, '.env') });
-dotenv.config({ path: path.join(__dirname, '../.env') });
+const rootEnv = dotenv.config({ path: path.join(__dirname, '../.env') }).parsed || {};
+const backendApiKey = process.env.GEMINI_API_KEY?.trim();
+const rootApiKey = rootEnv.GEMINI_API_KEY?.trim();
+if (
+    (!backendApiKey || backendApiKey.toLowerCase() === 'your_gemini_api_key_here')
+    && rootApiKey
+    && rootApiKey.toLowerCase() !== 'your_gemini_api_key_here'
+) {
+    process.env.GEMINI_API_KEY = rootApiKey;
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
