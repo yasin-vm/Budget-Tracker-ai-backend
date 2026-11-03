@@ -32,7 +32,7 @@ Set `MONGO_URI` in `.env` to the intended MongoDB database. Set `GEMINI_API_KEY`
 FRONTEND_ORIGINS=http://localhost:5500,https://your-frontend.example
 ```
 
-The API listens on `PORT` (3000 by default). Check `GET /api/health` to verify it is responding.
+The API listens on `PORT` (3000 by default). `GET /api` lists endpoint groups; check `GET /api/health` to verify the service is responding.
 
 On startup, a default administrator is created if no admin exists. For local development only, the credentials are `admin` / `Password123!`. Change or remove the seed credentials before deploying publicly; never expose a deployed default account.
 

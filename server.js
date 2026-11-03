@@ -26,6 +26,20 @@ app.use(express.json());
 // Routes
 app.use('/api', router);
 
+app.get('/api', (req, res) => {
+    res.json({
+        status: 'ok',
+        message: 'Budget Tracker API',
+        health: '/api/health',
+        endpoints: {
+            auth: ['/api/signup', '/api/login', '/api/logout'],
+            profile: ['/api/profile'],
+            transactions: ['/api/transaction'],
+            ai: ['/api/ai/parse', '/api/ai/auto-log', '/api/ai/insights', '/api/ai/chat']
+        }
+    });
+});
+
 app.get('/api/health', (req, res) => {
     res.json({
         status: 'ok',
