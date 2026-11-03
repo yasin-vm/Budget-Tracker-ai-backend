@@ -2,7 +2,7 @@
 
 REST API backend for a MERN budget tracker with MongoDB, authentication, and Google Gemini AI.
 
-This repository contains the Express API only. The frontend is maintained separately and sends requests to this service's `/api` endpoints.
+This repository contains the Express API only. The [frontend](https://github.com/yasin-vm/Budget-Tracker-mern-with-ai) is maintained separately and sends requests to this service's `/api` endpoints.
 
 ## Features
 
