@@ -2,7 +2,7 @@
 
 REST API backend for a MERN budget tracker with MongoDB, authentication, and Google Gemini AI.
 
-This repository contains the Express API only. The [frontend](https://github.com/yasin-vm/Budget-Tracker-mern-ai) is maintained separately and sends requests to this service's `/api` endpoints.
+The [frontend](https://github.com/yasin-vm/Budget-Tracker-mern-ai) is maintained separately. When its `public/` folder is alongside this backend repository, Express serves the dashboard and API from the same origin and port.
 
 ## Features
 
@@ -26,13 +26,13 @@ Copy-Item .env.example .env
 npm start
 ```
 
-Set `MONGO_URI` in `.env` to the intended MongoDB database. Set `GEMINI_API_KEY` to enable Gemini; without it, AI endpoints use the built-in fallback. Configure `FRONTEND_ORIGINS` as a comma-separated list of exact frontend origins, for example:
+Set `MONGO_URI` in `.env` to the intended MongoDB database. Replace the blank `GEMINI_API_KEY` with a valid Google AI Studio API key to enable Gemini; a blank or placeholder key uses the built-in fallback. Startup logs whether a non-placeholder key was loaded. If you host a frontend on a separate origin, configure `FRONTEND_ORIGINS` as a comma-separated list of exact origins, for example:
 
 ```env
-FRONTEND_ORIGINS=http://localhost:5500,https://your-frontend.example
+FRONTEND_ORIGINS=http://localhost:3000,https://your-frontend.example
 ```
 
-The API listens on `PORT` (3000 by default). `GET /api` lists endpoint groups; check `GET /api/health` to verify it is responding.
+The server listens on `PORT` (3000 by default), serves the dashboard at `/` when frontend files are available, and exposes the API at `/api`. Check `GET /api/health` to verify the service is responding.
 
 On startup, a default administrator is created if no admin exists. For local development only, the credentials are `admin` / `Password123!`. Change or remove the seed credentials before deploying publicly; never expose a deployed default account.
 
@@ -61,7 +61,7 @@ Protected routes require `Authorization: Bearer <session-token>`.
 
 ## Frontend connection
 
-Configure the frontend's API base URL to this service's origin and add the frontend's exact origin to `FRONTEND_ORIGINS`. The frontend repository's README documents this setup.
+The frontend defaults to `http://localhost:3000` for API requests. When served by this Express server, open `http://localhost:3000`; no separate frontend server is needed.
 
 ## Repository description
 
